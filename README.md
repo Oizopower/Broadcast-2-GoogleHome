@@ -6,6 +6,15 @@ Broadcast from $_GET to Google Home Mini ideal for Domoticz HTTP custom notifica
 sudo apt-get install nodejs npm  
 cd ~ && git clone https://github.com/Oizopower/Broadcast-2-GoogleHome && cd Broadcast-2-GoogleHome  
 npm install  
+edit config.json to your settings  
+
+```
+{
+  "GoogleHomeIp": "192.168.1.56", // Google Home IP
+  "GoogleHomelang": "nl", // Language
+  "WebserverPort": 5555 // Port to listen on
+}
+```
   
 sudo nano /lib/systemd/system/Broadcast-2-GoogleHome.service  
   
