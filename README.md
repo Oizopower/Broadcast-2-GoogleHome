@@ -1,7 +1,7 @@
 # Broadcast-2-GoogleHome
 Broadcast from $_GET to Google Home Mini ideal for Domoticz HTTP custom notifications
   
-# Installation
+## Installation
 
 sudo apt-get install nodejs npm  
 cd ~ && git clone https://github.com/Oizopower/Broadcast-2-GoogleHome && cd Broadcast-2-GoogleHome  
@@ -15,7 +15,12 @@ edit config.json to your settings
   "WebserverPort": 5555 // Port to listen on
 }
 ```
-  
+## Domoticz
+Go to Setup > Settings > Notifications  
+enable Custom HTTP/Action  
+Fill in URL/Action: http://localhost:5555/tts/#MESSAGE  
+
+## Automatic startup
 sudo nano /lib/systemd/system/Broadcast-2-GoogleHome.service  
   
 ```
@@ -37,8 +42,3 @@ WantedBy=multi-user.target
 sudo systemctl daemon-reload  
 sudo systemctl enable Broadcast-2-GoogleHome  
 sudo systemctl start Broadcast-2-GoogleHome  
-
-# Domoticz
-Go to Setup > Settings > Notifications  
-enable Custom HTTP/Action  
-Fill in URL/Action: http://localhost:5555/tts/#MESSAGE  
