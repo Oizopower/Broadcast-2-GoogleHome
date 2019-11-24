@@ -5,33 +5,13 @@ const Config     = require("./config.json");
 let ttsServer        = express();
 let GoogleHomeIP     = false;
 let GoogleHomeDevice = false;
-let GoogleHomeFound  = false;
+GoogleHomeIP         = Config.ip;
 
-if(Config.GoogleHomeIp === "auto")
+if(GoogleHomeIP !== undefined)
 {
-    GoogleHome.search(1000).then(resp => {
-        GoogleHomeIP    = resp[ 0 ].address;
-        GoogleHomeFound = true;
-
-        if(GoogleHomeIP !== undefined)
-        {
-            GoogleHomeDevice = new GoogleHome.Connecter(GoogleHomeIP);
-            GoogleHomeDevice.config({ lang: Config.GoogleHomelang });
-            console.log('Google Home device detected as: ' + GoogleHomeIP);
-        }
-    });
-}
-else
-{
-    GoogleHomeIP    = Config.ip;
-    GoogleHomeFound = true;
-
-    if(GoogleHomeIP !== undefined)
-    {
-        GoogleHomeDevice = new GoogleHome.Connecter(GoogleHomeIP);
-        GoogleHomeDevice.config({ lang: Config.GoogleHomelang });
-        console.log('Google Home device detected as: ' + GoogleHomeIP);
-    }
+    GoogleHomeDevice = new GoogleHome.Connecter(GoogleHomeIP);
+    GoogleHomeDevice.config({ lang: Config.GoogleHomelang });
+    console.log('Google Home device detected as: ' + GoogleHomeIP);
 }
 
 ttsServer.get('/', function (req, res) {

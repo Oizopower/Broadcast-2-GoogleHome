@@ -1,5 +1,5 @@
 {
-  "GoogleHomeIp": "auto",
+  "GoogleHomeIp": "192.168.1.56",
   "GoogleHomelang": "nl",
   "WebserverPort": 5555
 }

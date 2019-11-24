@@ -9,7 +9,7 @@
   "author": "Oizopower",
   "license": "MIT",
   "dependencies": {
-    "node-googlehome": "^0.0.7",
+    "node-googlehome": "git+https://github.com/Oizopower/node-googlehome",
     "express": "^4.17.1"
   },
   "repository": {
