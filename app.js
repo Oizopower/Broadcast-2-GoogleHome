@@ -5,7 +5,7 @@ const Config     = require("./config.json");
 let ttsServer        = express();
 let GoogleHomeIP     = false;
 let GoogleHomeDevice = false;
-GoogleHomeIP         = Config.ip;
+GoogleHomeIP         = Config.GoogleHomeIp;
 
 if(GoogleHomeIP !== undefined)
 {
