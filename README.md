@@ -42,3 +42,7 @@ WantedBy=multi-user.target
 sudo systemctl daemon-reload  
 sudo systemctl enable Broadcast-2-GoogleHome  
 sudo systemctl start Broadcast-2-GoogleHome  
+
+## Update
+cd ~/Broadcast-2-GoogleHome  
+git pull  
