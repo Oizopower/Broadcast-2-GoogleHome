@@ -1,0 +1,23 @@
+{
+  "name": "Broadcast-2-GoogleHome",
+  "version": "0.0.1",
+  "description": "Send a $_GET var to the Google Home device",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Oizopower",
+  "license": "MIT",
+  "dependencies": {
+    "node-googlehome": "^0.0.7",
+    "express": "^4.17.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Oizopower/gfg.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Oizopower/gfg/issues"
+  },
+  "homepage": "https://github.com/Oizopower/gfg#readme"
+}
