@@ -23,7 +23,7 @@ ttsServer.get('/', function (req, res) {
 
 ttsServer.get('/tts/*', function (req, res) {
 
-    if(GoogleHomeFound)
+    if(GoogleHomeIP)
     {
         let textToSpeech = req.params[ 0 ];
         res.send('Text to speech: ' + textToSpeech);
@@ -41,7 +41,7 @@ ttsServer.get('/tts/*', function (req, res) {
 
 ttsServer.get('/media/*', function (req, res) {
 
-    if(GoogleHomeFound)
+    if(GoogleHomeIP)
     {
         let mediaUrl = req.params[ 0 ];
         res.send('Text to speech: ' + mediaUrl);
