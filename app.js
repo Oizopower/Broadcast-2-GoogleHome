@@ -28,9 +28,11 @@ ttsServer.get('/tts/*', function (req, res) {
         let textToSpeech = req.params[ 0 ];
         res.send('Text to speech: ' + textToSpeech);
 
-        GoogleHomeDevice.speak(textToSpeech)
-            .then(console.log('Done playing ' + textToSpeech))
-            .catch(console.log)
+        GoogleHomeDevice.readySpeaker().then(() => {
+            GoogleHomeDevice.speak(textToSpeech)
+                .then(console.log('Done playing ' + textToSpeech))
+                .catch(console.log)
+        })
     }
     else
     {
@@ -46,9 +48,11 @@ ttsServer.get('/media/*', function (req, res) {
         let mediaUrl = req.params[ 0 ];
         res.send('Text to speech: ' + mediaUrl);
 
-        GoogleHomeDevice.playMedia(mediaUrl)
-            .then(console.log('Done playing ' + mediaUrl))
-            .catch(console.log)
+        GoogleHomeDevice.readySpeaker().then(() => {
+            GoogleHomeDevice.playMedia(mediaUrl)
+                .then(console.log('Done playing ' + mediaUrl))
+                .catch(console.log)
+        })
     }
     else
     {
