@@ -1,9 +1,13 @@
 # Broadcast-2-GoogleHome
 Broadcast from $_GET to Google Home Mini ideal for Domoticz HTTP custom notifications
-  
+
 ## Installation
 
-sudo apt-get install nodejs npm  
+### Install NodeJS and NPM
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -  
+sudo apt-get install -y nodejs  
+  
+### Install the package  
 cd ~ && git clone https://github.com/Oizopower/Broadcast-2-GoogleHome && cd Broadcast-2-GoogleHome  
 npm install  
 edit config.json to your settings  
