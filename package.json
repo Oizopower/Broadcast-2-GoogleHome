@@ -9,8 +9,10 @@
   "author": "Oizopower",
   "license": "MIT",
   "dependencies": {
-    "node-googlehome": "git+https://github.com/Oizopower/node-googlehome",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "node-googlehome": "git+https://github.com/Oizopower/node-googlehome.git",
+    "path": "^0.12.7",
+    "pug": "^2.0.4"
   },
   "repository": {
     "type": "git",

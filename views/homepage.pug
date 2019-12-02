@@ -1,0 +1,18 @@
+html
+    title Broadcast-2-GoogleHome
+    body
+        h1 Broadcast-2-GoogleHome how it works.
+
+        if !GoogleHomeIP
+            div(style={color: 'red'}) Google Home IP not set, please change in config.json
+        else
+            div Google Home IP:  #{GoogleHomeIP}
+
+        div Webserver Port:  #{WebserverPort}
+
+            if !SecretKey
+                div(style={color: 'red'}) Secret: not set, please change in config.json
+            else
+                div Secret:  Set !
+
+        div IP adress:  #{IP}
