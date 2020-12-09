@@ -1,6 +1,6 @@
 {
   "name": "Broadcast-2-GoogleHome",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Send a $_GET var to the Google Home device",
   "main": "app.js",
   "scripts": {
@@ -9,9 +9,10 @@
   "author": "Oizopower",
   "license": "MIT",
   "dependencies": {
+    "castv2-client": "^1.2.0",
     "express": "^4.17.1",
+    "google-tts-api": "^2.0.0",
     "ip": "^1.1.5",
-    "node-googlehome": "git+https://github.com/Oizopower/node-googlehome.git",
     "path": "^0.12.7",
     "pug": "^2.0.4"
   },

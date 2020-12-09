@@ -1,24 +1,19 @@
-const GoogleHome = require('node-googlehome');
 const express    = require("express");
 const Config     = require("./config.json");
 const path       = require("path");
-const ip = require("ip");
+const ip         = require("ip");
+
+const googleTTS = require('google-tts-api');
+const Client                = require('castv2-client').Client;
+const DefaultMediaReceiver  = require('castv2-client').DefaultMediaReceiver;
 
 let ttsServer        = express();
 let GoogleHomeIP     = false;
-let GoogleHomeDevice = false;
 GoogleHomeIP         = Config.GoogleHomeIp;
 
 ttsServer.set("view engine", "pug");
 ttsServer.set("views", path.join(__dirname, "views"));
 ttsServer.use('/files',express.static(path.join(__dirname, 'mp3')));
-
-if(GoogleHomeIP !== undefined)
-{
-    GoogleHomeDevice = new GoogleHome.Connecter(GoogleHomeIP);
-    GoogleHomeDevice.config({ lang: Config.GoogleHomelang });
-    console.log('Google Home device detected as: ' + GoogleHomeIP);
-}
 
 const middleware = (req, res, next) => {
 
@@ -52,26 +47,66 @@ ttsServer.get('/:secretKey/:announceType/*', middleware, function (req, res)
         {
             default:
             case "tts":
-                GoogleHomeDevice.readySpeaker().then(() => {
-                    GoogleHomeDevice.speak(textToSpeech)
-                        .then(console.log('Done playing ' + textToSpeech))
-                        .catch(console.log)
-                });
-                break;
+
+                var url = googleTTS.getAudioUrl(textToSpeech, {
+                  lang: Config.Language,
+                  slow: false,
+                  host: 'https://translate.google.com',
+                })
+
+                for (i = 0; i < GoogleHomeIP.length; i++)
+                {
+                    let client = new Client();
+                    client.connect(GoogleHomeIP[i], function ()
+                    {
+                        client.launch(DefaultMediaReceiver, function (err, player) {
+                            var media = {
+                              contentId:   url,
+                              contentType: 'audio/mp3',
+                              streamType:  'BUFFERED'
+                            };
+
+                            player.load(media, { autoplay: true }, function (err, status) {
+                                player.on('status', function (status) {
+                                    if(status.playerState == "IDLE")
+                                    {
+                                        player.stop();
+                                        client.close();
+                                    }
+                                });
+                            });
+                        })
+                    })
+                }
+
+            break;
             case "mp3":
-                GoogleHomeDevice.readySpeaker().then(() => {
-                    GoogleHomeDevice.playMedia('http://' + ip.address() +':'+Config.WebserverPort+'/files/' + textToSpeech)
-                        .then(console.log('Done playing ' + textToSpeech))
-                        .catch(console.log)
-                });
-                break;
             case "mp3url":
-                GoogleHomeDevice.readySpeaker().then(() => {
-                    GoogleHomeDevice.playMedia(textToSpeech)
-                        .then(console.log('Done playing ' + textToSpeech))
-                        .catch(console.log)
-                });
-                break;
+                for (i = 0; i < GoogleHomeIP.length; i++)
+                {
+                    let client = new Client();
+                    client.connect(GoogleHomeIP[i], function ()
+                    {
+                        client.launch(DefaultMediaReceiver, function (err, player) {
+                            var media = {
+                              contentId:   textToSpeech,
+                              contentType: 'audio/mp3',
+                              streamType:  'BUFFERED'
+                            };
+
+                            player.load(media, { autoplay: true }, function (err, status) {
+                                player.on('status', function (status) {
+                                    if(status.playerState == "IDLE")
+                                    {
+                                        player.stop();
+                                        client.close();
+                                    }
+                                });
+                            });
+                        })
+                    })
+                }
+            break;
         }
     }
     else
