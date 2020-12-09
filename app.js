@@ -23,6 +23,7 @@ const middleware = (req, res, next) => {
     }
     else
     {
+        console.log("Secret key not configured in Domoticz, Mismatch")
         return res.send(403, 'No way Jose!');
     }
 };
@@ -42,6 +43,7 @@ ttsServer.get('/:secretKey/:announceType/*', middleware, function (req, res)
     {
         let textToSpeech = req.params[ 0 ];
         res.send('Value to play: ' + textToSpeech);
+        console.log('Value to play: ' + textToSpeech + ' Announce type: ' + req.params.announceType);
 
         switch (req.params.announceType)
         {
