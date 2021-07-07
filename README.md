@@ -4,7 +4,7 @@ Broadcast from $_GET to Google Home Mini ideal for Domoticz HTTP custom notifica
 ## Installation
 
 ### Install NodeJS and NPM
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -  
+curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -  
 sudo apt-get install -y nodejs  
   
 ### Install the package  
